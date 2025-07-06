@@ -1,35 +1,24 @@
-#!/usr/bin/env python3
-"""
-main.py:
-Command-line interface for the robust division calculator.
-Takes two arguments (numerator and denominator) and prints the result
-from the safe_divide function.
-"""
-
-import sys
-# Import the safe_divide function from the robust_division_calculator module
-from robust_division_calculator import safe_divide
+from library_management import Book, Library
 
 def main():
-    """
-    Main function to handle command-line arguments for division.
-    """
-    # Check if the correct number of arguments are provided (script name + 2 arguments)
-    if len(sys.argv) != 3:
-        print("Usage: python main.py <numerator> <denominator>")
-        sys.exit(1) # Exit with an error code, indicating incorrect usage
+    # Setup a small library
+    library = Library()
+    library.add_book(Book("Brave New World", "Aldous Huxley"))
+    library.add_book(Book("1984", "George Orwell"))
 
-    # sys.argv[0] is the script name itself
-    # sys.argv[1] is the first argument (numerator)
-    # sys.argv[2] is the second argument (denominator)
-    numerator = sys.argv[1]
-    denominator = sys.argv[2]
+    # Initial list of available books
+    print("Available books after setup:")
+    library.list_available_books()
 
-    # Call the safe_divide function with the command-line arguments
-    result = safe_divide(numerator, denominator)
+    # Simulate checking out a book
+    library.check_out_book("1984")
+    print("\nAvailable books after checking out '1984':")
+    library.list_available_books()
 
-    # Print the result returned by safe_divide
-    print(result)
+    # Simulate returning a book
+    library.return_book("1984")
+    print("\nAvailable books after returning '1984':")
+    library.list_available_books()
 
 if __name__ == "__main__":
     main()
